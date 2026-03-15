@@ -178,7 +178,38 @@ def qfCreateProductRFRSwap(
 
 
 ## TODO: Implement qfCreateProductOvernightIndexBasisSwap
-
+def qfCreateProductOvernightIndexBasisSwap(
+    effective_date: str,
+    termination_date: str,
+    pay_offset: str,
+    on_index_1: str,
+    on_index_2: str,
+    spread_leg_1: float,
+    pay_or_rec: str,
+    notional: float,
+    accrual_peroid_1: str,
+    accrual_basis: str,
+    accrual_peroid_2: Optional[str] = "",
+    pay_business_day_convention: Optional[str] = "F",
+    pay_holiday_convention: Optional[str] = "USGS",
+    compounding_method: Optional[str] = "compound"
+):
+    return ProductOvernightIndexBasisSwap(
+        Date(effective_date),
+        TermOrTerminationDate(termination_date),
+        Period(pay_offset),
+        on_index_1,
+        on_index_2,
+        spread_leg_1,
+        PayOrReceive(pay_or_rec),
+        notional,
+        Period(accrual_peroid_1),
+        AccrualBasis(accrual_basis),
+        Period(accrual_peroid_2),
+        BusinessDayConvention(pay_business_day_convention),
+        HolidayConvention(pay_holiday_convention),
+        CompoundingMethod.from_string(compounding_method)
+    )
 
 def qfCreateBondSpecs(key: str, parameters: dict) -> BondSpecs:
 
